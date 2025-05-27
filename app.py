@@ -73,7 +73,7 @@ def handle_message(event):
         line_bot_api = MessagingApi(api_client)
         if text == "麻打麻打":
             url = request.url_root + 'static/madamada.mp3'
-            url = url.replace("http", "https")
+            url = url.replace("http:", "https:")
             app.logger.info("url=" + url)
             duration = 2600  # in milliseconds
             line_bot_api.reply_message(
