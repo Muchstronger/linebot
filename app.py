@@ -16,7 +16,7 @@ from linebot.v3.messaging import (
     ButtonsTemplate,
     PostbackAction,
     PushMessageRequest,
-    Audiomessage
+    AudioMessage
 )
 from linebot.v3.webhooks import (
     MessageEvent,
