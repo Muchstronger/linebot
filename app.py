@@ -29,6 +29,7 @@ app = Flask(__name__)
 #CHANNEL_ACCESS_TOKEN and CHANNEL_SECRET
 configuration = Configuration(access_token=os.getenv('CHANNEL_ACCESS_TOKEN'))
 line_handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
+MYGROUP = os.getenv('GROUP_ID')
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -55,7 +56,7 @@ def remind():
         line_bot_api = MessagingApi(api_client)
         line_bot_api.push_message(
             PushMessageRequest(
-                to="你的群組ID或userID",
+                to=MYGROUP,
                 messages=[TextMessage(text="💰 匯款提醒：今天是 1 號，記得匯款！")]
             )
         )
