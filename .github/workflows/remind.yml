@@ -2,7 +2,7 @@ name: Monthly Remind
 
 on:
   schedule:
-    - cron: "33 9 27 * *"  # UTC 時間，台灣約是 +8 小時，自己調整時間
+    - cron: "*/3 * * * *"  # UTC 時間，台灣約是 +8 小時，自己調整時間
 
 jobs:
   remind:
