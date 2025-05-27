@@ -75,7 +75,7 @@ def handle_message(event):
             url = request.url_root + 'static/madamada.mp3'
             url = url.replace("http", "https")
             app.logger.info("url=" + url)
-            duration = 60000  # in milliseconds
+            duration = 2600  # in milliseconds
             line_bot_api.reply_message(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
