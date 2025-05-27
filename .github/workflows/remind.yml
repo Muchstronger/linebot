@@ -1,0 +1,12 @@
+name: Monthly Remind
+
+on:
+  schedule:
+    - cron: "0 9 27 * *"  # UTC 時間，台灣約是 +8 小時，自己調整時間
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call remind API
+        run: curl -X GET https://linebotv1.vercel.app/remind
