@@ -70,31 +70,31 @@ def remind():
 #     print(f'Got {event.type} event')
 
 #postback
-@line_handler.add(MessageEvent, message=TextMessageContent)
-def handle_message(event):
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
-        if event.message.text == 'postback':
-            buttons_template = ButtonsTemplate(
-                title='Postback Sample',
-                text='Postback Action',
-                actions=[
-                    PostbackAction(label='Postback Action', text='Post Action Button CLicked!', data='postback'),#讓使用者發訊息
-                ])
-            template_message = TemplateMessage(
-                alt_text = 'Postback Sample',
-                template=buttons_template
-            )
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[template_message]
-                )
-            )
-@line_handler.add(PostbackEvent)
-def handle_postback(event):
-    if event.postback.data == 'postback':
-        print('Post Action Button Clickes!')
+# @line_handler.add(MessageEvent, message=TextMessageContent)
+# def handle_message(event):
+#     with ApiClient(configuration) as api_client:
+#         line_bot_api = MessagingApi(api_client)
+#         if event.message.text == 'postback':
+#             buttons_template = ButtonsTemplate(
+#                 title='Postback Sample',
+#                 text='Postback Action',
+#                 actions=[
+#                     PostbackAction(label='Postback Action', text='Post Action Button CLicked!', data='postback'),#讓使用者發訊息
+#                 ])
+#             template_message = TemplateMessage(
+#                 alt_text = 'Postback Sample',
+#                 template=buttons_template
+#             )
+#             line_bot_api.reply_message(
+#                 ReplyMessageRequest(
+#                     reply_token=event.reply_token,
+#                     messages=[template_message]
+#                 )
+#             )
+# @line_handler.add(PostbackEvent)
+# def handle_postback(event):
+#     if event.postback.data == 'postback':
+#         print('Post Action Button Clickes!')
 
 #echo訊息
 # @handler.add(MessageEvent, message=TextMessageContent)
