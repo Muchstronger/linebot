@@ -15,7 +15,8 @@ from linebot.v3.messaging import (
     TemplateMessage,
     ButtonsTemplate,
     PostbackAction,
-    PushMessageRequest
+    PushMessageRequest,
+    Audiomessage
 )
 from linebot.v3.webhooks import (
     MessageEvent,
@@ -51,7 +52,7 @@ def callback():
 
     return 'OK'
 
-#remider PUSH
+#提醒大家要匯款
 @app.route("/remind", methods=["GET"])
 def remind():
     with ApiClient(configuration) as api_client:
@@ -59,10 +60,30 @@ def remind():
         line_bot_api.push_message(
             PushMessageRequest(
                 to=MYGROUP,
-                messages=[TextMessage(text="💰 匯款提醒：今天是 1 號，記得匯款！")]
+                messages=[TextMessage(text="哥哥～你該不會又、又、又、忘了今天是幾號吧？/n人家都已經特～地～幫你記住每個月這天要匯款了說，結果你還在那邊打開動畫等更新是不是！！(｀へ´)/n/n快去把錢匯好啦～！/n我可是連你的銀行帳戶都有在觀察喔～（欸？開玩笑的啦，別緊張緊張～）/n/n如果你乖乖完成了，我可以考慮給你看一眼我今天穿的襪子花色 (´艸`)/n……才不是真的會給你看啦笨蛋～誰會對這種事情興奮啦，呿。/n/n總之，動作快點，哥哥這種腦容量有限的生物，真的不適合拖事！")]
             )
         )
     return "OK"
+
+#麻打麻打
+@handler.add(MessageEvent, message=TextMessageContent)
+def handle_message(event):
+    text = event.message.text
+    with ApiClient(configuration) as api_client:
+        line_bot_api = MessagingApi(api_client)
+        if text == "麻打麻打":
+            url = request.url_root + 'static/madamada.mp3'
+            url = url.replace("http", "https")
+            app.logger.info("url=" + url)
+            duration = 60000  # in milliseconds
+            line_bot_api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[
+                        AudioMessage(original_content_url=url, duration=duration)
+                    ]
+                )
+            )
 
 # #加入好友
 # @handler.add(FollowEvent)
@@ -95,18 +116,6 @@ def remind():
 # def handle_postback(event):
 #     if event.postback.data == 'postback':
 #         print('Post Action Button Clickes!')
-
-#echo訊息
-# @handler.add(MessageEvent, message=TextMessageContent)
-# def handle_message(event):
-#     with ApiClient(configuration) as api_client:
-#         line_bot_api = MessagingApi(api_client)
-#         line_bot_api.reply_message_with_http_info(
-#             ReplyMessageRequest(
-#                 reply_token=event.reply_token,
-#                 messages=[TextMessage(text=event.message.text)]
-#             )
-#         )
 
 if __name__ == "__main__":
     app.run()
