@@ -80,6 +80,7 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
+                        TextMessage(text="(*≧▽≦)ノシ♪ 待った待った～！"),
                         AudioMessage(original_content_url=url, duration=duration)
                     ]
                 )
