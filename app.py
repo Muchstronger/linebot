@@ -23,6 +23,8 @@ from linebot.v3.webhooks import (
     TextMessageContent
 )
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
