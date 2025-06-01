@@ -69,9 +69,9 @@ def remind():
 @line_handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     text = event.message.text
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
-        if text == "麻打麻打":
+    if text == "麻打麻打":
+        with ApiClient(configuration) as api_client:
+            line_bot_api = MessagingApi(api_client)
             url = request.url_root + 'static/madamada.mp3'
             url = url.replace("http:", "https:")
             app.logger.info("url=" + url)
@@ -80,7 +80,7 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
-                        AudioMessage(original_content_url=url, duration=duration)
+                         AudioMessage(original_content_url=url, duration=duration)
                     ]
                 )
             )
