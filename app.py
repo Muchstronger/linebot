@@ -60,7 +60,7 @@ def remind():
         line_bot_api.push_message(
             PushMessageRequest(
                 to=MYGROUP,
-                messages=[TextMessage(text="哥哥～你該不會又、又、又、忘了今天是幾號吧？\n人家都已經特～地～幫你記住每個月這天要匯款了說，結果你還在那邊打開動畫等更新是不是！！(｀へ´)\n\n快去把錢匯好啦～！\n我可是連你的銀行帳戶都有在觀察喔～（欸？開玩笑的啦，別緊張緊張～）\n\n如果你乖乖完成了，我可以考慮給你看一眼我今天穿的襪子花色 (´艸`)\n……才不是真的會給你看啦笨蛋～誰會對這種事情興奮啦，呿。\n\n總之，動作快點，哥哥這種腦容量有限的生物，真的不適合拖事！")]
+                messages=[TextMessage(text="哥哥～今天是幾號你還記得嗎？再不匯房租的話……我就只好把你可憐的行李箱扔到門口，然後幫你準備紙箱了喔～✧٩(ˊᗜˋ)و✧")]
             )
         )
     return "OK"
@@ -80,7 +80,6 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
-                        TextMessage(text="(*≧▽≦)ノシ♪ 待った待った～！"),
                         AudioMessage(original_content_url=url, duration=duration)
                     ]
                 )
